@@ -55,7 +55,7 @@ module circuit (
 
   always @(posedge clk) state <= go ? next_state : 1'b0;
 
-  always @(*) begin  // verilog_lint: waive always-comb
+  always_comb begin  // verilog_lint: waive always-comb
     next_state = !state;
   end
 
