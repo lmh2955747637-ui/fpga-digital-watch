@@ -1,8 +1,8 @@
 `timescale 1ns / 1ps
 
 module mod_n_counter #(
-    parameter int N     = 4,         // Modulus (0 to N-1)
-    parameter int WIDTH = $clog2(N)  // Bit width
+    parameter int N     = 4,  // Modulus (0 to N-1)
+    parameter int WIDTH = 2   // Bit width
 ) (
     input  logic             clk,     // Clock
     input  logic             rst,     // Reset (active high)
@@ -26,3 +26,13 @@ module mod_n_counter #(
   end
 
 endmodule
+
+// Seven-segment display decoder for hexadecimal digits.
+//
+// Parameters:
+// ACTIVE_LOW - 1: active-low outputs, 0: active-high outputs.
+//
+// Ports:
+// digit   [3:0] - Input hex digit (0x0 to 0xF).
+// blank          - When high, all segments off.
+// segments[6:0] - Output segments [g,f,e,d,c,b,a].
