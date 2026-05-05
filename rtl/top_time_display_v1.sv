@@ -13,19 +13,15 @@ module top_time_display_v1 #(
     output logic [6:0] HEX0
 );
 
-  // =========================================================
   // Run control for restartable rate generators
   // Only the selected slow generator runs.
-  // =========================================================
   logic run_1hz, run_25hz, run_1khz;
 
   assign run_1hz  = (SW == 2'b00);
   assign run_25hz = (SW == 2'b01);
   assign run_1khz = (SW == 2'b10);
 
-  // =========================================================
   // Tick generation
-  // =========================================================
   logic tick_1hz, tick_25hz, tick_1khz;
   logic tick;
 
@@ -53,10 +49,8 @@ module top_time_display_v1 #(
       .tick(tick_1khz)
   );
 
-  // =========================================================
   // Tick selection
   // SW=11 means full speed: advance every clock cycle.
-  // =========================================================
   always_comb begin
     unique case (SW)
       2'b00:   tick = tick_1hz;
@@ -67,9 +61,7 @@ module top_time_display_v1 #(
     endcase
   end
 
-  // =========================================================
   // Time counter
-  // =========================================================
   logic [4:0] hours;
   logic [5:0] minutes;
   logic [5:0] seconds;
@@ -82,10 +74,8 @@ module top_time_display_v1 #(
       .seconds(seconds)
   );
 
-  // =========================================================
   // Binary to BCD
   // binary_to_bcd expects a 7-bit input
-  // =========================================================
   logic [3:0] h_tens, h_ones;
   logic [3:0] m_tens, m_ones;
   logic [3:0] s_tens, s_ones;
@@ -108,18 +98,14 @@ module top_time_display_v1 #(
       .ones(s_ones)
   );
 
-  // =========================================================
   // No blanking
-  // =========================================================
   logic blank_h, blank_m, blank_s;
 
   assign blank_h = 1'b0;
   assign blank_m = 1'b0;
   assign blank_s = 1'b0;
 
-  // =========================================================
   // Seven-segment display
-  // =========================================================
   seven_segment u_HEX5 (
       .digit   (h_tens),
       .blank   (blank_h),
