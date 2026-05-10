@@ -4,10 +4,10 @@ module mod_n_counter #(
     parameter int N     = 4,  // Modulus (0 to N-1)
     parameter int WIDTH = 2   // Bit width
 ) (
-    input  logic             clk,     // Clock
-    input  logic             rst,     // Reset (active high)
-    input  logic             enable,  // Enable counting
-    output logic [WIDTH-1:0] count    // Current count
+    input  logic             clk,        // Clock
+    input  logic             rst,        // Reset (active high)
+    input  logic             enable,     // Enable counting
+    output logic [WIDTH-1:0] count = '0  // Current count
 );
   localparam logic [WIDTH-1:0] MAX = WIDTH'(N - 1);
   logic [WIDTH-1:0] next_count;  // Next state
