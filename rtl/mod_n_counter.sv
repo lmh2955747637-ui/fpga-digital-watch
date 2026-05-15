@@ -27,12 +27,26 @@ module mod_n_counter #(
 
 endmodule
 
-// Seven-segment display decoder for hexadecimal digits.
+// Mod-N synchronous counter with enable and reset.
 //
 // Parameters:
-// ACTIVE_LOW - 1: active-low outputs, 0: active-high outputs.
+// N     - Counter modulus. Counter counts from 0 to N-1.
+// WIDTH - Bit width of the counter output.
 //
 // Ports:
-// digit   [3:0] - Input hex digit (0x0 to 0xF).
-// blank          - When high, all segments off.
-// segments[6:0] - Output segments [g,f,e,d,c,b,a].
+// clk              - Clock input; counter updates on rising edge.
+// rst              - Active-high synchronous reset.
+// enable           - When high, counter increments each clock cycle.
+// count[WIDTH-1:0] - Current counter value.
+//
+// Behaviour:
+// - Counter starts at 0.
+// - When rst = 1, count resets to 0.
+// - When enable = 1, count increments on each rising clock edge.
+// - When count reaches N-1, it wraps around to 0.
+// - When enable = 0, the counter holds its current value.
+//
+// Notes:
+// - Uses always_comb for next-state logic.
+// - Uses always_ff for sequential state updates.
+// - MAX is width-cast to avoid width-mismatch warnings.
