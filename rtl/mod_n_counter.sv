@@ -16,7 +16,7 @@ module mod_n_counter #(
   // Compute next count value
   always_comb begin
     if (count == MAX) next_count = '0;  // Wrap to 0
-    else next_count = count + 1;  // Increment
+    else next_count = count + WIDTH'(1);  // Increment
   end
 
   // Update register on clock edge
