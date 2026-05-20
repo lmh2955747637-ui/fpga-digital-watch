@@ -1,3 +1,5 @@
+`timescale 1ns / 1ps
+
 module cascade_counter #(
     parameter int N2 = 3,
     parameter int N1 = 4,
