@@ -47,3 +47,31 @@ module cascade_counter #(
   end
 
 endmodule
+
+// Cascaded multi-stage counter with enable and reset.
+//
+// Parameters:
+// N2 - Maximum count value for count2 stage.
+// N1 - Maximum count value for count1 stage.
+// N0 - Maximum count value for count0 stage.
+
+// W2 - Bit width of count2 output.
+// W1 - Bit width of count1 output.
+// W0 - Bit width of count0 output.
+//
+// Ports:
+// clk    - Clock input; all updates occur on rising edges.
+// rst    - Active-high synchronous reset.
+// enable - When high, the counter updates; when low, values are held.
+//
+// count2 - Most significant counter stage.
+// count1 - Middle counter stage.
+// count0 - Least significant counter stage.
+//
+// Behaviour:
+// - When rst = 1, all outputs are reset to 0 on the next rising clock edge.
+// - When enable = 1, count0 increments on each rising clock edge.
+// - When count0 reaches N0-1, it rolls over to 0 and increments count1.
+// - When count1 reaches N1-1, it rolls over to 0 and increments count2.
+// - When count2 reaches N2-1, it rolls over to 0.
+// - The counter stages are cascaded using rollover conditions between stages.
