@@ -30,6 +30,10 @@ module user_top_stopwatch_v1 #(
   logic [5:0] display_seconds;
   logic [6:0] display_centiseconds;
 
+  logic unused;
+
+  assign unused = &{button[3:2], sw};
+
   // LEDs mirror switches
   assign led = sw;
 
