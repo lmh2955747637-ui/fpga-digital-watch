@@ -20,9 +20,8 @@ module stopwatch_control (
   assign next_lap_hold =
       (rise_lap && !rise_start_stop && counter_enable)
       ? ~lap_hold :
-      (rise_lap && !rise_start_stop && !counter_enable && lap_hold)
-      ? 1'b0
-      : lap_hold;
+      (rise_lap && !rise_start_stop && !counter_enable && lap_hold) // Unfreeze
+      ? 1'b0 : lap_hold;
 
   // counter_rst next-state logic
   always_comb begin
