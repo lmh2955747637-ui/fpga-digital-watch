@@ -19,12 +19,12 @@ module user_top_brightness_wrapper #(
 );
 
   // PWM period = 1 ms
-  localparam int PWM_PERIOD = CYCLES_PER_SECOND / 1000;
+  localparam int PwmPeriod = CYCLES_PER_SECOND / 1000;
 
   // Counter width required for PWM period
-  localparam int PWM_WIDTH = $clog2(PWM_PERIOD);
+  localparam int PwmWidth = $clog2(PwmPeriod);
 
-  logic [PWM_WIDTH-1:0] pwm_count;
+  logic [PwmWidth-1:0] pwm_count;
 
   logic pwm_on;
   logic pwm_blank;
@@ -56,8 +56,8 @@ module user_top_brightness_wrapper #(
 
   // PWM counter
   mod_n_counter #(
-      .N(PWM_PERIOD),
-      .WIDTH(PWM_WIDTH)
+      .N(PwmPeriod),
+      .WIDTH(PwmWidth)
   ) u_pwm_counter (
       .clk(clk),
       .rst(1'b0),
@@ -67,18 +67,18 @@ module user_top_brightness_wrapper #(
 
 
   // PWM brightness selection logic
-  always_comb begin
-
+  // verilator lint_off ALWAYSCOMB
+  always @(*) begin
     case (sw[9:8])
 
       // 12.5% brightness
-      2'b00: pwm_on = (pwm_count < PWM_WIDTH'(PWM_PERIOD / 8));
+      2'b00: pwm_on = (pwm_count < PwmWidth'(PwmPeriod / 8));
 
       // 25% brightness
-      2'b01: pwm_on = (pwm_count < PWM_WIDTH'(PWM_PERIOD / 4));
+      2'b01: pwm_on = (pwm_count < PwmWidth'(PwmPeriod / 4));
 
       // 50% brightness
-      2'b11: pwm_on = (pwm_count < PWM_WIDTH'(PWM_PERIOD / 2));
+      2'b11: pwm_on = (pwm_count < PwmWidth'(PwmPeriod / 2));
 
       // 100% brightness
       2'b10: pwm_on = 1'b1;
