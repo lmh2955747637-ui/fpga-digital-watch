@@ -67,8 +67,8 @@ module user_top_brightness_wrapper #(
 
 
   // PWM brightness selection logic
-  // verilator lint_off ALWAYSCOMB
-  always @(*) begin
+  /* verible-lint-disable always-comb */
+  always @(*) begin  // verible-lint: waive always-comb
     case (sw[9:8])
 
       // 12.5% brightness
@@ -88,7 +88,7 @@ module user_top_brightness_wrapper #(
     endcase
 
   end
-
+  /* verible-lint-enable always-comb */
 
   // Active-high PWM blanking signal
   assign pwm_blank = ~pwm_on;
