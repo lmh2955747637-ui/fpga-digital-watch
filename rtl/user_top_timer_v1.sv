@@ -80,7 +80,7 @@ module user_top_timer_v1 #(
 
   pwm_generator #(
       .PERIOD_CYCLES(CYCLES_PER_SECOND / 2),
-      .DUTY_CYCLES  (CYCLES_PER_SECOND * 4 / 10)
+      .DUTY_CYCLES  (CYCLES_PER_SECOND / 10)
   ) u_pwm (
       .clk    (clk),
       .rst    (1'b0),
