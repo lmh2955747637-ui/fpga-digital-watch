@@ -9,13 +9,13 @@ module mod_n_counter #(
     input  logic             enable,     // Enable counting
     output logic [WIDTH-1:0] count = '0  // Current count
 );
-  localparam logic [WIDTH-1:0] MAX = WIDTH'(N - 1);
+  localparam logic [WIDTH-1:0] Max = WIDTH'(N - 1);
   logic [WIDTH-1:0] next_count;  // Next state
 
 
   // Compute next count value
   always_comb begin
-    if (count == MAX) next_count = '0;  // Wrap to 0
+    if (count == Max) next_count = '0;  // Wrap to 0
     else next_count = count + WIDTH'(1);  // Increment
   end
 
