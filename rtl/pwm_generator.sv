@@ -36,3 +36,28 @@ module pwm_generator #(
   end
 
 endmodule
+
+// PWM signal generator.
+//
+// Generates a Pulse Width Modulation (PWM) waveform using a counter.
+//
+// Parameters:
+//   PERIOD_CYCLES - Total number of clock cycles in one PWM period.
+//   DUTY_CYCLES   - Number of clock cycles the output stays high
+//                   during each PWM period.
+//
+// Ports:
+//   clk     - System clock input.
+//   rst     - Active-high reset input.
+//   pwm_out - PWM output signal.
+//
+// Behaviour:
+// - A counter repeatedly counts from 0 to PERIOD_CYCLES-1.
+// - 'pwm_out' is high while count < DUTY_CYCLES.
+// - 'pwm_out' is low for the remainder of the PWM period.
+// - Duty cycle ratio = DUTY_CYCLES / PERIOD_CYCLES.
+//
+// Notes:
+// - Counter width is automatically calculated using $clog2.
+// - Width casting is used to avoid lint warnings.
+// - Designed for FPGA-based PWM applications.
